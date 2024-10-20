@@ -60,3 +60,7 @@ cypress/
 -   always to think about when UI render slowly due to internet problem, will our test fail, try to think about the stability
 -   Best Practices for writing Cypress Tests, please refer to : https://docs.cypress.io/guides/references/best-practices
 
+## limitations
+Unable to set the application state programmatically (e.g., adding a product to the cart via API or other methods), or clean up tests before/after execution or upon failures. This prevents the tests from being fully atomic.
+
+Unable to log in programmatically (e.g., setting cookies or local storage via API), which forces the checkout test to rely on UI-based login, reducing efficiency.

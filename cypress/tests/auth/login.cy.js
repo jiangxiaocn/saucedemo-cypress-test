@@ -1,53 +1,32 @@
-import strings from "../../constans/strings"
+import strings from "../../constants/strings"
 
 describe ('Login',()=>{
+
+    const users = [
+        { username: Cypress.env('username'), password: Cypress.env('password'), error: null },
+        { username: 'invalid_user', password: Cypress.env('password'), error: strings.wrongUsernameAndPasswd },
+        { username: Cypress.env('username'), password: 'invalid_passwd', error: strings.wrongUsernameAndPasswd },
+        { username: 'invalid_user', password: 'invalid_passwd', error: strings.wrongUsernameAndPasswd },
+        { username: '{selectall}{backspace}', password: Cypress.env('password'), error: strings.wrongUsername },//{selectall}{backspace} equal to empty
+        { username: Cypress.env('username'), password: '{selectall}{backspace}', error: strings.wrongPasswd },
+        { username: '{selectall}{backspace}', password: '{selectall}{backspace}', error: strings.wrongUsername },
+      ];
 
     beforeEach(()=>{
          cy.visit('/')
     })
-    it('login with valid username and valid password',()=>{
-        cy.login(Cypress.env('username'),Cypress.env('password'))
-        cy.url().should('include','/inventory')
-        cy.getByDataTest('inventory-list').should('be.visible')
-        cy.getByDataTest('inventory-item').should('have.length.greaterThan',0)
-    })
-
-    it('login with INVALID username & valid password',()=>{
-        cy.login('standard',Cypress.env('password'))
-        cy.getByDataTest('error').invoke('text').then((errorText)=>{
-            expect(errorText).to.equal(strings.wrongUsernameAndPasswd)
-        })
-    })
-
-    it('login with valid username & INVALID password',()=>{
-        cy.login(Cypress.env('username'),'secret')
-        cy.getByDataTest('error').invoke('text').then((errorText)=>{
-            expect(errorText).to.equal(strings.wrongUsernameAndPasswd)
-        })
-    })
-
-    it('login with INVALID username & INVALID password',()=>{
-        cy.login('standard','secret')
-        cy.getByDataTest('error').invoke('text').then((errorText)=>{
-            expect(errorText).to.equal(strings.wrongUsernameAndPasswd)
-        })
-    })
-    it('login with EMPTY username & VALID password',()=>{
-        cy.login('{selectall}{backspace}','secret_sauce')
-        cy.getByDataTest('error').invoke('text').then((errorText)=>{
-            expect(errorText).to.equal(strings.wrongUsername)
-        })
-    })
-    it('login with VALID username & EMPTY password',()=>{
-        cy.login('standard_user','{selectall}{backspace}')
-        cy.getByDataTest('error').invoke('text').then((errorText)=>{
-            expect(errorText).to.equal(strings.wrongPasswd)
-        })
-    })
-    it('login with EMPTY username & EMPTY password',()=>{
-        cy.login('{selectall}{backspace}','{selectall}{backspace}')
-        cy.getByDataTest('error').invoke('text').then((errorText)=>{
-            expect(errorText).to.equal(strings.wrongUsername)
-        })
-    })
+    
+      
+      users.forEach((user) => {
+        it(`login with ${user.username === '{selectall}{backspace}' ? 'empty' : user.username === Cypress.env('username') ? 'valid' : 'invalid'} username and ${user.password === '{selectall}{backspace}' ? 'empty' : user.password === Cypress.env('password') ? 'valid' : 'invalid'} password`, () => {
+          cy.login(user.username, user.password);
+          if (user.error) {
+            cy.getByDataTest('error').should('exist').invoke('text').should('equal', user.error);
+          } else {
+            cy.url().should('include', '/inventory');
+            cy.getByDataTest('inventory-list').should('be.visible');
+          }
+        });
+      });
+      
 })

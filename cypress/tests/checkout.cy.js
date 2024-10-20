@@ -2,7 +2,7 @@ describe('add product to cart', () => {
 
   it('add product to cart and checkout', () => {
     cy.visit('/')
-    cy.login('standard_user', 'secret_sauce')
+    cy.login(Cypress.env('username'),Cypress.env('password'))
 
     // Capture product information from the inventory page
     cy.getByDataTest('inventory-item-description').first().then($description => {

@@ -1,3 +1,6 @@
+///<reference types="cypress"/>
+import strings from "../constants/strings";
+
 describe('add product to cart', () => {
 
   it('add product to cart and checkout', () => {
@@ -28,7 +31,7 @@ describe('add product to cart', () => {
     validateProductInfo('checkout-summary-container')
 
     cy.getByDataTest('finish').click()
-    cy.contains('Thank you for your order!')
+    cy.contains(strings.checkoutSuccess)
   })
 
   const validateProductInfo = (context) => {

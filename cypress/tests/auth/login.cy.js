@@ -1,4 +1,5 @@
-import strings from "../../constants/strings"
+///<reference types="cypress"/>
+import strings from "../../constants/strings";
 
 describe ('Login',()=>{
 

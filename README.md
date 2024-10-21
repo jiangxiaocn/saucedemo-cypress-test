@@ -14,6 +14,9 @@ Create a `.env` file in the root directory of your project. Add the following in
 
 `USERNAME=validUsername`
 `PASSWORD=validPassword`
+`FIRSTNAME=xiao`
+`LASTNAME=jiang`
+`POSTALCODE=12067`
 
 
 Install Cypress via npm:

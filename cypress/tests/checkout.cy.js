@@ -16,16 +16,18 @@ describe('add product to cart', () => {
 
     cy.getByDataTest('add-to-cart-sauce-labs-backpack').click()
     cy.getByDataTest('shopping-cart-link').click()
+    cy.url().should('contain', '/cart.html')
 
     // Validate product information on the cart page
     validateProductInfo('cart-contents-container')
 
     cy.getByDataTest('checkout').click()
-    cy.getByDataTest('firstName').type('xiao')
-    cy.getByDataTest('lastName').type('jiang')
-    cy.getByDataTest('postalCode').type('12067')
+    cy.url().should('contain', 'checkout-step-one.html')
+    cy.getByDataTest('firstName').type(Cypress.env('firstname'))
+    cy.getByDataTest('lastName').type(Cypress.env('lastName'))
+    cy.getByDataTest('postalCode').type(Cypress.env('postalCode'))
     cy.getByDataTest('continue').click()
-
+    cy.url().should('contain', 'checkout-step-two.html')
 
     // Validate product information on the checkout overview page
     validateProductInfo('checkout-summary-container')

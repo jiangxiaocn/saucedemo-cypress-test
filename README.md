@@ -5,6 +5,18 @@
 
 # 🛠️Setup and installation 
 
+Install the Package
+To install the necessary package, run:
+
+`npm install dotenv --save-dev`
+
+## ⚠️ Important Note
+Create a .env file in the root directory of your project. Add the following information to the file, replacing validUsername and validPassword with the actual credentials:
+
+`USERNAME=validUsername`
+`PASSWORD=validPassword`
+
+
 Install Cypress via npm:
 
 `cd /your/project/path`
@@ -43,6 +55,9 @@ cypress/
 ├── tests/ # test specs
 │   ├── checkout.cy.js
 │   └── ...
+├── vedios/ 
+│   └── ...
+├── .gitignore
 ├── README.md # this doc
 ```
 ## How to name and where to put your tests and other related code

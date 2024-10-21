@@ -5,8 +5,7 @@
 
 # 🛠️Setup and installation 
 
-Install the Package
-To install the necessary package, run:
+Install the necessary package, run:
 
 `npm install dotenv --save-dev`
 

@@ -10,8 +10,8 @@ To install the necessary package, run:
 
 `npm install dotenv --save-dev`
 
-## ⚠️ Important Note
-Create a .env file in the root directory of your project. Add the following information to the file, replacing validUsername and validPassword with the actual credentials:
+### ⚠️ Important Note
+Create a `.env` file in the root directory of your project. Add the following information to the file, replacing validUsername and validPassword with the actual credentials:
 
 `USERNAME=validUsername`
 `PASSWORD=validPassword`

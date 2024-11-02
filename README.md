@@ -64,9 +64,10 @@ cypress/
 ├── README.md # this doc
 ```
 ## Limitations
-Unable to set the application state programmatically (e.g., adding a product to the cart via API or other methods), or clean up tests before/after execution or upon failures. This prevents the tests from being fully atomic.
 
-Unable to log in programmatically (e.g., setting cookies or local storage or via API), which forces the checkout test to rely on UI-based login, reducing efficiency.
+Unable to set the application state programmatically (e.g., adding a product to the cart via API)
+
+Unable to log in programmatically (via API), which forces the checkout test to rely on UI-based login, reducing efficiency.
 
 ## How to name and where to put your tests and other related code
 -  scenarios should be named after features that they test, examples: login.cy.js

@@ -60,7 +60,6 @@ cypress/
 ├── vedios/ 
 │   └── ...
 ├── .gitignore
->>>>>>> version2
 ├── README.md # this doc
 ```
 ## Limitations

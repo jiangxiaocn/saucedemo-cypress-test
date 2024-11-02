@@ -15,6 +15,11 @@ describe('add product to cart and checkout', () => {
     })
   })
 
+  afterEach(() => {
+    cy.clearLocalStorage();
+    cy.clearCookies(); 
+});
+
   it('add product to cart and check product info on Cart page', () => {
 
     cy.getByDataTest('add-to-cart-sauce-labs-backpack').click()

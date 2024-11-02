@@ -13,8 +13,10 @@ Install the necessary package, run:
 Create a `.env` file in the root directory of your project. Add the following information to the file, replacing validUsername and validPassword with the actual credentials:
 
 `USERNAME=validUsername`
-
 `PASSWORD=validPassword`
+`FIRSTNAME=xiao`
+`LASTNAME=jiang`
+`POSTALCODE=12067`
 
 
 Install Cypress via npm:
@@ -44,7 +46,7 @@ cypress/
 │   ├── strings.js
 │   └── ...
 ├── fixtures/ # stubbed responses from API endpoints
-│   ├── purchaseSubscription.json
+│   ├── example.json
 │   └── ...
 ├── helpers/ # helper code that can be shared between commands or scenarios
 │   └── ...
@@ -58,12 +60,13 @@ cypress/
 ├── vedios/ 
 │   └── ...
 ├── .gitignore
+>>>>>>> version2
 ├── README.md # this doc
 ```
 ## Limitations
-Unable to set the application state programmatically (e.g., adding a product to the cart via API or other methods), or clean up tests before/after execution or upon failures. This prevents the tests from being fully atomic.
+Unable to set the application state programmatically (e.g., adding a product to the cart via API)
 
-Unable to log in programmatically (e.g., setting cookies or local storage via API), which forces the checkout test to rely on UI-based login, reducing efficiency.
+Unable to log in programmatically (via API), which forces the checkout test to rely on UI-based login, reducing efficiency.
 
 ## How to name and where to put your tests and other related code
 -  scenarios should be named after features that they test, examples: login.cy.js

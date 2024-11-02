@@ -49,7 +49,7 @@ cypress/
 │   ├── example.json
 │   └── ...
 ├── helpers/ # helper code that can be shared between commands or scenarios
-│   └── ...
+│   └── productHelpers.js
 ├── screenshots/ # automatically save screenshots when tests failing
 ├── support/ # put custom commands that interact with the app here.
 │   ├── commands.js
@@ -64,10 +64,9 @@ cypress/
 ├── README.md # this doc
 ```
 ## Limitations
+Unable to set the application state programmatically (e.g. adding a product to the cart via API)
 
-Unable to set the application state programmatically (e.g., adding a product to the cart via API)
-
-Unable to log in programmatically (via API), which forces the checkout test to rely on UI-based login, reducing efficiency.
+Unable to log in programmatically (via API), which forces the checkout test to rely on UI-based login, reducing efficiency and adding potential flakness.
 
 ## How to name and where to put your tests and other related code
 -  scenarios should be named after features that they test, examples: login.cy.js

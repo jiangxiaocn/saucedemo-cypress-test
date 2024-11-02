@@ -1,71 +1,56 @@
 ///<reference types="cypress"/>
+import { selectors } from "../constants/selectors";
 import strings from "../constants/strings";
+import { URLs } from "../constants/urls";
+import { captureProductDetails, validateProductInfo } from "../helpers/productHelpers";
 
 describe('add product to cart and checkout', () => {
 
   beforeEach(() => {
     cy.loginSession(Cypress.env('username'), Cypress.env('password'))
-    cy.visit('/inventory.html', { failOnStatusCode: false })
-
-    // Capture product information from the inventory page
-    cy.getByDataTest('inventory-item-description').first().then($description => {
-      cy.wrap($description.find('.inventory_item_price').text()).as('productPrice');
-      cy.wrap($description.find('.inventory_item_name').text()).as('productTitle');
-      cy.wrap($description.find('.inventory_item_desc').text()).as('productDescription');
-    })
+    cy.visit(URLs.inventoryPage, { failOnStatusCode: false })
+    captureProductDetails();
   })
 
   afterEach(() => {
     cy.clearLocalStorage();
-    cy.clearCookies(); 
-});
+    cy.clearCookies();
+  });
 
   it('add product to cart and check product info on Cart page', () => {
 
-    cy.getByDataTest('add-to-cart-sauce-labs-backpack').click()
-    cy.getByDataTest('shopping-cart-link').click()
-    cy.url().should('contain', '/cart.html')
+    cy.getByDataTest(selectors.addToCartButton).click()
+    cy.getByDataTest(selectors.cartLink).click()
+    cy.url().should('contain', URLs.cart)
 
     // Validate product information on the cart page
-    validateProductInfo('cart-contents-container')
+    validateProductInfo(selectors.cartCotent)
 
   })
 
   it('add product to cart and check product info on Checkout page', () => {
+    //add product into localstorage
     cy.window().then((window) => {
       window.localStorage.setItem('cart-contents', JSON.stringify([4]));
     });
 
-    cy.visit('/cart.html', { failOnStatusCode: false })
+    cy.visit(URLs.cart, { failOnStatusCode: false })
 
-    cy.getByDataTest('checkout').click()
-    cy.url().should('contain', 'checkout-step-one.html')
-    cy.getByDataTest('firstName').type(Cypress.env('firstname'))
-    cy.getByDataTest('lastName').type(Cypress.env('lastName'))
-    cy.getByDataTest('postalCode').type(Cypress.env('postalCode'))
-    cy.getByDataTest('continue').click()
-    cy.url().should('contain', 'checkout-step-two.html')
+    // Fill out checkout form
+    cy.getByDataTest(selectors.checkoutButton).click()
+    cy.url().should('contain', URLs.checkoutStepOne)
+    cy.getByDataTest(selectors.firstName).type(Cypress.env('firstname'))
+    cy.getByDataTest(selectors.lastName).type(Cypress.env('lastName'))
+    cy.getByDataTest(selectors.postalCode).type(Cypress.env('postalCode'))
+    cy.getByDataTest(selectors.continueButton).click()
+    cy.url().should('contain', URLs.checkoutStepTwo)
 
     // Validate product information on the checkout overview page
-    validateProductInfo('checkout-summary-container')
+    validateProductInfo(selectors.checkoutSummary)
 
-    cy.getByDataTest('finish').click()
+    cy.getByDataTest(selectors.finishButton).click()
     cy.contains(strings.checkoutSuccess)
 
   })
-  const validateProductInfo = (context) => {
-    cy.get('@productTitle').then((productTitle) => {
-      cy.getByDataTest(`${context}`).find('.inventory_item_name').should('have.text', productTitle);
-
-    });
-
-    cy.get('@productDescription').then((productDescription) => {
-      cy.getByDataTest(`${context}`).find('.inventory_item_desc').should('have.text', productDescription);
-    });
-
-    cy.get('@productPrice').then((productPrice) => {
-      cy.getByDataTest(`${context}`).find('.inventory_item_price').should('have.text', productPrice);
-    });
-  };
 
 })

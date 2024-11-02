@@ -24,7 +24,7 @@ Cypress.Commands.add('loginSession', (username, password) => {
     cy.getByDataTest('username').type(username)
     cy.getByDataTest('password').type(password)
     cy.getByDataTest('login-button').click()
-    cy.url().should('include', '/inventory'); // Adjust based on your app
+    cy.url().should('include', '/inventory');
     });
 });
 

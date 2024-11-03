@@ -26,15 +26,7 @@ jobs:
 
       - name: Install dotenv
         run: npm install dotenv
-   
 
-      - name: Set up environment
-        run: |
-          echo USERNAME=${{ secrets.USERNAME }} >> .env
-          echo PASSWORD=${{ secrets.PASSWORD }} >> .env
-          echo FIRSTNAME=${{ secrets.FIRSTNAME }} >> .env
-          echo LASTNAME=${{ secrets.LASTNAME }} >> .env
-          echo LASTNAME=${{ secrets.POSTALCODE }} >> .env
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6

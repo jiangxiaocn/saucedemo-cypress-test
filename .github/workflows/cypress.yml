@@ -1,0 +1,31 @@
+name: Run Tests
+
+on: [push, pull_request]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up environment
+        run: |
+          echo USERNAME=${{ secrets.USERNAME }} >> .env
+          echo PASSWORD=${{ secrets.PASSWORD }} >> .env
+          echo FIRSTNMAE=${{ secrets.FIRSTNMAE }} >> .env
+          echo LASTNAME=${{ secrets.LASTNAME }} >> .env
+          echo LASTNAME=${{ secrets.POSTACODE }} >> .env
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run Cypress tests
+        uses: cypress-io/github-action@v6
+        env:
+            USERNAME: ${{ secrets.USERNAME }}
+            PASSWORD: ${{ secrets.PASSWORD }}
+            CYPRESS_FIRSTNMAE: ${{ secrets.firstname }}
+            CYPRESS_LASTNAME: ${{ secrets.lastName }}
+            CYPRESS_POSTACODE: ${{ secrets.postalCode }}

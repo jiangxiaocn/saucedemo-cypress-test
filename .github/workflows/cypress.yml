@@ -1,6 +1,6 @@
 name: Run Tests
 
-on: [push, pull_request]
+on: [push]
 
 jobs:
   test:
@@ -21,25 +21,22 @@ jobs:
         with:
           node-version: "14"
 
-      - name: Setup yarn
-        run: npm install -g yarn        
-
-      - name: Install dependencies
-        run: yarn
+      - name: Install project dependencies
+        run: npm install       
 
       - name: Set up environment
         run: |
           echo USERNAME=${{ secrets.USERNAME }} >> .env
           echo PASSWORD=${{ secrets.PASSWORD }} >> .env
-          echo FIRSTNMAE=${{ secrets.FIRSTNMAE }} >> .env
+          echo FIRSTNAME=${{ secrets.FIRSTNAME }} >> .env
           echo LASTNAME=${{ secrets.LASTNAME }} >> .env
-          echo LASTNAME=${{ secrets.POSTACODE }} >> .env
+          echo LASTNAME=${{ secrets.POSTALCODE }} >> .env
 
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         env:
             USERNAME: ${{ secrets.USERNAME }}
             PASSWORD: ${{ secrets.PASSWORD }}
-            CYPRESS_FIRSTNMAE: ${{ secrets.firstname }}
+            CYPRESS_FIRSTNAME: ${{ secrets.firstname }}
             CYPRESS_LASTNAME: ${{ secrets.lastName }}
-            CYPRESS_POSTACODE: ${{ secrets.postalCode }}
+            CYPRESS_POSTALCODE: ${{ secrets.postalCode }}

@@ -1,0 +1,13 @@
+{
+    "name": "cypressdemo",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "cypress run",
+        "test:chrome": "cypress run --browser chrome"
+    },
+    "devDependencies": {
+        "cypress": "^12.17.4"
+    }
+}

@@ -22,7 +22,11 @@ jobs:
           node-version: "14"
 
       - name: Install project dependencies
-        run: npm install       
+        run: npm install    
+
+      - name: Install dotenv
+        run: npm install dotenv
+   
 
       - name: Set up environment
         run: |

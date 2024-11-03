@@ -35,3 +35,23 @@ jobs:
             CYPRESS_FIRSTNAME: ${{ secrets.firstname }}
             CYPRESS_LASTNAME: ${{ secrets.lastName }}
             CYPRESS_POSTALCODE: ${{ secrets.postalCode }}
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() && steps.cypress-testing-step.outcome == 'failure' }}
+        with:
+            name: cypress-screenshots
+            path: ./tests/cypress/screenshots
+            if-no-files-found: ignore # 'warn' or 'error' are also available, defaults to `warn`
+
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() && steps.cypress-testing-step.outcome == 'failure' }}
+        with:
+            name: cypress-videos
+            path: ./tests/cypress/videos
+            if-no-files-found: ignore
+
+      - uses: actions/upload-artifact@v3
+        if: ${{ failure() && steps.cypress-testing-step.outcome == 'failure' }}
+        with:
+              name: cypress-logs
+              path: ./tests/cypress/logs
+              if-no-files-found: ignore

@@ -7,7 +7,7 @@ import { captureProductDetails, validateProductInfo } from "../helpers/productHe
 describe('add product to cart and checkout', () => {
 
   beforeEach(() => {
-    cy.loginSession(Cypress.env('username'), Cypress.env('password'))
+    cy.loginSession(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
     cy.visit(URLs.inventoryPage, { failOnStatusCode: false })
     captureProductDetails();
   })
@@ -39,9 +39,9 @@ describe('add product to cart and checkout', () => {
     // Fill out checkout form
     cy.getByDataTest(selectors.checkoutButton).click()
     cy.url().should('contain', URLs.checkoutStepOne)
-    cy.getByDataTest(selectors.firstName).type(Cypress.env('firstname'))
-    cy.getByDataTest(selectors.lastName).type(Cypress.env('lastName'))
-    cy.getByDataTest(selectors.postalCode).type(Cypress.env('postalCode'))
+    cy.getByDataTest(selectors.firstName).type(Cypress.env('FIRSTNAME'))
+    cy.getByDataTest(selectors.lastName).type(Cypress.env('LASTNAME'))
+    cy.getByDataTest(selectors.postalCode).type(Cypress.env('POSTALCODE'))
     cy.getByDataTest(selectors.continueButton).click()
     cy.url().should('contain', URLs.checkoutStepTwo)
 

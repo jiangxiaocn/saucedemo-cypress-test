@@ -5,12 +5,12 @@ import { selectors } from "../../constants/selectors";
 describe('Login', () => {
 
   const users = [
-    { username: Cypress.env('username'), password: Cypress.env('password'), error: null },
-    { username: 'invalid_user', password: Cypress.env('password'), error: strings.wrongUsernameAndPasswd },
-    { username: Cypress.env('username'), password: 'invalid_passwd', error: strings.wrongUsernameAndPasswd },
+    { username: Cypress.env('USERNAME'), password: Cypress.env('PASSWORD'), error: null },
+    { username: 'invalid_user', password: Cypress.env('PASSWORD'), error: strings.wrongUsernameAndPasswd },
+    { username: Cypress.env('USERNAME'), password: 'invalid_passwd', error: strings.wrongUsernameAndPasswd },
     { username: 'invalid_user', password: 'invalid_passwd', error: strings.wrongUsernameAndPasswd },
-    { username: '{selectall}{backspace}', password: Cypress.env('password'), error: strings.wrongUsername },//{selectall}{backspace} equal to empty
-    { username: Cypress.env('username'), password: '{selectall}{backspace}', error: strings.wrongPasswd },
+    { username: '{selectall}{backspace}', password: Cypress.env('PASSWORD'), error: strings.wrongUsername },//{selectall}{backspace} equal to empty
+    { username: Cypress.env('USERNAME'), password: '{selectall}{backspace}', error: strings.wrongPasswd },
     { username: '{selectall}{backspace}', password: '{selectall}{backspace}', error: strings.wrongUsername },
   ];
 
@@ -20,7 +20,7 @@ describe('Login', () => {
 
 
   users.forEach((user) => {
-    it(`login with ${user.username === '{selectall}{backspace}' ? 'empty' : user.username === Cypress.env('username') ? 'valid' : 'invalid'} username and ${user.password === '{selectall}{backspace}' ? 'empty' : user.password === Cypress.env('password') ? 'valid' : 'invalid'} password`, () => {
+    it(`login with ${user.username === '{selectall}{backspace}' ? 'empty' : user.username === Cypress.env('USERNAME') ? 'valid' : 'invalid'} username and ${user.password === '{selectall}{backspace}' ? 'empty' : user.password === Cypress.env('PASSWORD') ? 'valid' : 'invalid'} password`, () => {
       cy.login(user.username, user.password);
       if (user.error) {
         cy.getByDataTest(selectors.logInError).should('exist').invoke('text').should('equal', user.error);

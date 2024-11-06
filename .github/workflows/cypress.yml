@@ -23,10 +23,6 @@ jobs:
       - name: Install project dependencies
         run: npm install    
 
-      - name: Install dotenv
-        run: npm install dotenv
-
-
       - name: Run Cypress tests
         uses: cypress-io/github-action@v6
         env:

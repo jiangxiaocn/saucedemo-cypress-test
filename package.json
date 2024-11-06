@@ -5,9 +5,11 @@
     "main": "index.js",
     "scripts": {
         "test": "cypress run",
-        "test:chrome": "cypress run --browser chrome"
+        "test:chrome": "cypress run --browser chrome",
+        "open": "cypress open"
     },
     "devDependencies": {
-        "cypress": "^12.17.4"
+        "cypress": "^12.17.4",
+        "dotenv": "^16.4.5"
     }
 }

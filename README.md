@@ -7,35 +7,29 @@
 
 Install the necessary package, run:
 
-`npm install dotenv --save-dev`
+`npm install`
 
 ### ⚠️ Important Note
 Create a `.env` file in the root directory of your project. Add the following information to the file, replacing validUsername and validPassword with the actual credentials:
 
-`USERNAME=validUsername`
-`PASSWORD=validPassword`
-`FIRSTNAME=xiao`
-`LASTNAME=jiang`
-`POSTALCODE=12067`
+`USERNAME=validUsername`<br>
+`PASSWORD=validPassword`<br>
+`FIRSTNAME=xiao`<br>
+`LASTNAME=jiang`<br>
+`POSTALCODE=12067`<br>
 
-
-Install Cypress via npm:
-
-`cd /your/project/path`
-
-`npm install cypress --save-dev`
 
 Open Cypress UI:
 
-`npx cypress open`
+`npm run open`
 
 Run Cypress tests on Electron in headless mode:
 
-`npx cypress run`
+`npm run test`
 
 Run Cypress tests on Chrome in headless mode:
 
-`npx cypress run --browser chrome`
+`npm run test:chrome`
 
 ## Folder structure
 
@@ -67,6 +61,9 @@ cypress/
 Unable to set the application state programmatically (e.g. adding a product to the cart via API)
 
 Unable to log in programmatically (via API), which forces the checkout test to rely on UI-based login, reducing efficiency and adding potential flakness.
+
+## Github actions
+Check the test result in githu actions ui
 
 ## How to name and where to put your tests and other related code
 -  scenarios should be named after features that they test, examples: login.cy.js

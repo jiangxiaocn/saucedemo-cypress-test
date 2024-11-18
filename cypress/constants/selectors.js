@@ -4,7 +4,6 @@ export const selectors = {
     inventoryList: 'inventory-list',
 
     //inventory page
-    addToCartButton: 'add-to-cart-sauce-labs-backpack',
     cartLink: 'shopping-cart-link',
 
     //cart page

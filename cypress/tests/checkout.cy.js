@@ -1,15 +1,16 @@
 ///<reference types="cypress"/>
+import { productTitle } from "../constants/productTitle";
 import { selectors } from "../constants/selectors";
 import strings from "../constants/strings";
 import { URLs } from "../constants/urls";
-import { captureProductDetails, validateProductInfo } from "../helpers/productHelpers";
+import { captureProductDetails, validateProductInfo, addToCartButton } from "../helpers/productHelpers";
 
 describe('add product to cart and checkout', () => {
 
   beforeEach(() => {
     cy.loginSession(Cypress.env('USERNAME'), Cypress.env('PASSWORD'))
     cy.visit(URLs.inventoryPage, { failOnStatusCode: false })
-    captureProductDetails();
+    captureProductDetails(productTitle.sauceLabsBackpack)
   })
 
   afterEach(() => {
@@ -19,7 +20,7 @@ describe('add product to cart and checkout', () => {
 
   it('add product to cart and check product info on Cart page', () => {
 
-    cy.getByDataTest(selectors.addToCartButton).click()
+    addToCartButton(productTitle.sauceLabsBackpack)
     cy.getByDataTest(selectors.cartLink).click()
     cy.url().should('contain', URLs.cart)
 
